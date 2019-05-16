@@ -6,6 +6,9 @@ import 'dart:convert';
 import '../util/utils.dart' as util;
 
 class  Weather extends StatefulWidget {
+  final String city;
+  Weather({Key key,this.city}):super(key :key);
+
   @override
   WeatherState createState() => WeatherState();
 }
@@ -13,7 +16,7 @@ class  Weather extends StatefulWidget {
 class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
 
   void showWeather() async{
-    Map data = await getWeather(util.apiId, util.defaultCity);
+    Map data = await getWeather(util.apiId, "${widget.city}");
     print(data.toString());
   }
 
@@ -43,7 +46,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
             alignment: Alignment.topRight,
             margin: new EdgeInsets.fromLTRB(0, 10, 15, 0),
             child: new Text(
-                'Negombo',
+                "${widget.city}",
                 style: new TextStyle(
                   fontSize: 34,
                   fontStyle: FontStyle.italic
@@ -52,7 +55,7 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
           ),
           new Container(
             margin: new EdgeInsets.fromLTRB(25, 400, 0, 0),
-            child: UpdateTempWidget('Negombo'),
+            child: UpdateTempWidget("${widget.city}"),
           )
         ],
       ),
