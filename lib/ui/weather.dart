@@ -78,22 +78,31 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
 
   Widget UpdateTempWidget(String city){
     return new FutureBuilder(
-        future: getWeather(util.apiId, city),
+        future: getWeather(util.apiId, city == null ? util.defaultCity:city),
         builder:(BuildContext context,AsyncSnapshot<Map> snapshot){
           if(snapshot.hasData){
             Map content = snapshot.data;
-            return new Container(
-              child: new Column(
-                children: <Widget>[
-                  new ListTile(
-                    title:new Text(
+            if(content['main']==null){
+              return new Container(
+                child: new Text(
+                  "The city is not Found!!",
+                  style: wetherDetails(),
+                ),
+              );
+            }else{
+              return new Container(
+                child: new Column(
+                  children: <Widget>[
+                    new ListTile(
+                      title:new Text(
                         content['main']['temp'].toString(),
-                      style: wetherDetails(),
-                    ),
-                  )
-                ],
-              ),
-            );
+                        style: wetherDetails(),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            }
           }else{
             return new Container();
           }
