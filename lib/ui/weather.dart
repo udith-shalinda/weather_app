@@ -5,6 +5,8 @@ import 'dart:convert';
 
 import '../util/utils.dart' as util;
 
+import './city.dart';
+
 class  Weather extends StatefulWidget {
   final String city;
   Weather({Key key,this.city}):super(key :key);
@@ -29,7 +31,13 @@ class WeatherState extends State<Weather> with SingleTickerProviderStateMixin {
         title: new Text('Weather'),
         actions: <Widget>[
           new IconButton(
-              onPressed: showWeather,
+              onPressed: (){
+                var router = new MaterialPageRoute(
+                    builder: (BuildContext context){
+                      return new City();
+                    });
+                Navigator.of(context).push(router);
+              },
               icon: new Icon(Icons.menu),
               )
         ],
