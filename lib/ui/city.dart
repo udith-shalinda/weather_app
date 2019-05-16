@@ -18,26 +18,38 @@ class _CityState extends State<City> {
         title: new Text("City"),
         backgroundColor: Colors.redAccent,
       ),
-      body: new ListView(
+      body: new Stack(
         children: <Widget>[
-          new ListTile(
-            title: new TextField(
-              controller: _cityName,
-              decoration: new InputDecoration(
-                labelText: "Enter the city"
-              ),
+          new Center(
+            child: new Image.asset(
+              'images/cover.jpg',
+              width: 459,
+              height: 1250,
+              fit: BoxFit.cover,
             ),
           ),
-          new ListTile(
-            title: new RaisedButton(
-                child: new Text("Weather"),
-                onPressed: (){
-                  var router = new MaterialPageRoute(
-                      builder: (BuildContext context){
-                        return new Weather(city:_cityName.text);
-                      });
-                  Navigator.of(context).push(router);
-                })
+          new ListView(
+            children: <Widget>[
+              new ListTile(
+                title: new TextField(
+                  controller: _cityName,
+                  decoration: new InputDecoration(
+                      labelText: "Enter the city"
+                  ),
+                ),
+              ),
+              new ListTile(
+                  title: new RaisedButton(
+                      child: new Text("Weather"),
+                      onPressed: (){
+                        var router = new MaterialPageRoute(
+                            builder: (BuildContext context){
+                              return new Weather(city:_cityName.text);
+                            });
+                        Navigator.of(context).push(router);
+                      })
+              )
+            ],
           )
         ],
       )
